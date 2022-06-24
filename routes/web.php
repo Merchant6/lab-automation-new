@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,7 @@ use App\Http\Controllers\AuthController;
 */
 
 Route::get('/', function () {
-    return redirect('dashboard.home');
+    return redirect('dashboard');
 });
 
 //Dashboard Routes
@@ -31,3 +32,6 @@ Route::post('custom-registration', [AuthController::class, 'customRegistration']
 
 //Logout Routes
 Route::get('signout', [AuthController::class, 'signOut'])->name('signout');
+
+//Add or Create Product
+Route::get('add-product',[ProductController::class, 'create'])->name('add-product');

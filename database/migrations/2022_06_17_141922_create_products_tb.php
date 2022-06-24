@@ -14,12 +14,17 @@ return new class extends Migration
     public function up()
     {
         Schema::create('products_tb', function (Blueprint $table) {
-            $table->id()->startingValue(100);
-            $table->foreign('id')->references('id')->on('testing_tb');
+            $table->id()->startingValue(10000);
+            // $table->foreign('id')->references('id')->on('testing_tb');
             $table->string('product_name', 50);
             $table->string('category',50);
+            $table->string('testing_type', 50);
+            $table->string('remarks', 400);
             $table->timestamps();
+           
         });
+
+        
     }
 
     /**
@@ -31,4 +36,6 @@ return new class extends Migration
     {
         Schema::dropIfExists('products_tb');
     }
+
+    
 };
