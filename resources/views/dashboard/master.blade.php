@@ -20,11 +20,11 @@
 
       
 
-      <div class="container-scroller">
+      <div class="container-scroller m-0">
 
         @include('navbars\navabar')
 
-        <div class="container-fluid page-body-wrapper pt-0 proBanner-padding-top">
+        <div class="container-fluid page-body-wrapper my-0">
           <!-- partial:partials/_sidebar.html -->
           @include('navbars\sidebar')
           <!-- partial -->

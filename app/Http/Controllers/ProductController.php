@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
+use App\Models\products;
+use Exception;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -26,16 +30,48 @@ class ProductController extends Controller
         return view('products\add-product');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function createProduct(Request $request)
     {
-        //
+        
+            $request->validate([
+                'product_name' => 'required',
+                'category' => 'required',
+                'testing_type' => 'required',
+                'remarks' => 'required',
+            ]);
+    
+            $data = $request->all();
+            products::create([
+                'product_name' => $data['product_name'],
+                'category' => $data['category'],
+                'testing_type' => $data['testing_type'],
+                'remarks' => $data['remarks'],
+              ]);
+
+              
+            
+              return redirect()->to('view_products')->with('success','Product added successfully');
+        
+       
     }
+
+            public function viewDetails(Request $request)
+            {
+                $p_details = products::all();
+                return view('products\view_products', compact('p_details'));
+            }
+
+
+        /**
+         * Store a newly created resource in storage.
+         *
+         * @param  \Illuminate\Http\Request  $request
+         * @return \Illuminate\Http\Response
+         */
+        public function store(Request $request)
+        {
+            //
+        }
 
     /**
      * Display the specified resource.
@@ -43,10 +79,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
+        public function show()
+        {
+                
+        }
 
     /**
      * Show the form for editing the specified resource.
@@ -79,6 +115,16 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $products = products::findOrFail($id);
+        $products->delete();
+
+        return redirect('view_products')->with('error', 'Product successfully deleted');
     }
+
+    // public function countPro()
+    // {
+    //     $tested = products::where("testing_type", ['Earth Testing' OR 'Resistence Testing' OR 'Leakage Testing'])->count();
+    //     view()->share('tested', $tested);
+    // }
+    
 }

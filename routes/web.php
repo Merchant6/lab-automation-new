@@ -35,3 +35,10 @@ Route::get('signout', [AuthController::class, 'signOut'])->name('signout');
 
 //Add or Create Product
 Route::get('add-product',[ProductController::class, 'create'])->name('add-product');
+Route::post('product_created',[ProductController::class, 'createProduct'])->name('product_created');
+
+//View Product
+Route::get('/view_products',[ProductController::class, 'viewDetails'])->name('view_products');
+
+//Delete Product
+Route::delete('/delete_product/{id}',[ProductController::class, 'destroy'])->name('delete_product');
