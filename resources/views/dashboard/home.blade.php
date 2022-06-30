@@ -7,16 +7,16 @@
             
             
                 
-        
-                <div class="main-panel">
-                    <div class="content-wrapper">
+            
+                <div class="main-panel p-3">
+                    <div class=" my-3">
                     
                     <div class="row">
                         <div class="col-md-12 grid-margin">
                         <div class="d-flex justify-content-between flex-wrap">
                             <div class="d-flex align-items-end flex-wrap">
                             <div class="me-md-3 me-xl-5">
-                                <h2>Welcome back,</h2>
+                                <h2>Welcome back, <span class="text-capitalize">{{Auth::user()->username}}</span></h2>
                                 <p class="mb-md-0">Your analytics dashboard template.</p>
                             </div>
                             <div class="d-flex">
@@ -41,12 +41,12 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 grid-margin stretch-card">
+                        <div class="col-md-12  stretch-card">
                         <div class="card">
                             <div class="card-body dashboard-tabs p-0">
-                            <ul class="nav nav-tabs px-4" role="tablist">
+                            <ul class="nav nav-tabs px-2" role="tablist">
                                 <li class="nav-item">
-                                <a class="nav-link active" id="overview-tab" data-bs-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
+                                <h4 class="nav-link active mx-2">Insights</h4>
                                 </li>
                                 
                             </ul>
@@ -54,58 +54,45 @@
                                 <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
                                 <div class="d-flex flex-wrap justify-content-xl-between">
                                     <div class="d-none d-xl-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                                    <i class="mdi mdi-calendar-heart icon-lg me-3 text-primary"></i>
                                     <div class="d-flex flex-column justify-content-around">
 
-                                        <script>
-                                                
-                                                
-                                                var today = new Date();
-                                                var dd = String(today.getDate()).padStart(2, '0');
-                                                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-                                                var yyyy = today.getFullYear();
-                                                
-                                                today =  mm + '/' + dd + '/' + yyyy ;
-                                                 
-                                                document.getElementById('showDate').InnerHTML =  today ;
-                                                
-                                        </script>
-
-
-                                        <small class="mb-1 text-muted">Current date</small>
-                                        <div class="dropdown">
-                                        <a class="btn btn-secondary p-0 bg-transparent border-0 text-dark shadow-none font-weight-medium" href="#" role="button" id="dropdownMenuLinkA" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <h5 class="mb-0 d-inline-block"><span id="showDate"></span></h5>
-                                        </a>
                                        
+                                        
+
+                                        <small class="mb-1 text-muted"></small>
+                                        <div class="">
+                                            <h5 class="mb-0 d-inline-block"></h5>
+                                        
+                                       
+                                        
                                     </div>
                                     </div>
                                     <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                                    <i class="mdi mdi-currency-usd me-3 icon-lg text-danger"></i>
+                                    <i class="mdi mdi-arrow-bottom-right me-3 icon-lg text-warning"></i>
+                                    <div class="d-flex flex-column justify-content-around">
+                                        <small class="mb-1 text-muted">Total Products</small>
+                                        <h5 class="me-2 mb-0">{{$total}}</h5>
+                                    </div>
+                                    </div>
+                                    <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                    <i class="mdi mdi-check-all me-3 icon-lg text-success"></i>
                                     <div class="d-flex flex-column justify-content-around">
                                         <small class="mb-1 text-muted">Tested Products</small>
-                                        <h5 class="me-2 mb-0">{{DB::table("products_tb")->where("testing_type", ['Earth Testing' , 'Resistence Testing' , 'Leakage Testing'])->count(); }}</h5>
+                                        <h5 class="me-2 mb-0">{{$tested}}</h5>
                                     </div>
                                     </div>
                                     <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                                    <i class="mdi mdi-eye me-3 icon-lg text-success"></i>
+                                    <i class="mdi mdi-close-box-multiple-outline me-3 icon-lg text-danger"></i>
                                     <div class="d-flex flex-column justify-content-around">
-                                        <small class="mb-1 text-muted">Total views</small>
-                                        <h5 class="me-2 mb-0">9833550</h5>
-                                    </div>
-                                    </div>
-                                    <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                                    <i class="mdi mdi-download me-3 icon-lg text-warning"></i>
-                                    <div class="d-flex flex-column justify-content-around">
-                                        <small class="mb-1 text-muted">Downloads</small>
-                                        <h5 class="me-2 mb-0">2233783</h5>
+                                        <small class="mb-1 text-muted">Untested Products</small>
+                                        <h5 class="me-2 mb-0">{{ $untested}}</h5>
                                     </div>
                                     </div>
                                     <div class="d-flex py-3 border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
-                                    <i class="mdi mdi-flag me-3 icon-lg text-danger"></i>
+                                    <i class="mdi mdi-arrow-collapse me-3 icon-lg text-primary"></i>
                                     <div class="d-flex flex-column justify-content-around">
-                                        <small class="mb-1 text-muted">Flagged</small>
-                                        <h5 class="me-2 mb-0">3497843</h5>
+                                        <small class="mb-1 text-muted">Ratio: Tested to Untested</small>
+                                        <h5 class="me-2 mb-0">{{$ratio}}</h5>
                                     </div>
                                     </div>
                                 </div>
@@ -120,7 +107,7 @@
                         </div>
                         </div>
                     </div>
-                    <div class="row p-5">
+                    <div class="row p-1">
                         
                         <div class="col-md-12 grid-margin stretch-card">
                         <div class="card">
@@ -132,8 +119,9 @@
                             </div>
                         </div>
                         </div>
-                       
-                    </div>
+
+                        
+                        </div>
                  
                     </div>
                     <!-- content-wrapper ends -->

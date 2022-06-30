@@ -22,7 +22,7 @@
 
       <div class="container-scroller m-0">
 
-        @include('navbars\navabar')
+        @include('navbars\navabar', ['searchValue' => 'search'])
 
         <div class="container-fluid page-body-wrapper my-0">
           <!-- partial:partials/_sidebar.html -->

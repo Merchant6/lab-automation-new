@@ -12,6 +12,7 @@
             {{ session()->get('error') }}  
           </div><br />
         @endif
+      </div> 
 
         <div class="uper my-4">
           @if(session()->get('success'))
@@ -19,11 +20,13 @@
               {{ session()->get('success') }}  
             </div><br />
           @endif
+        </div>
 
+        
       <div class="table-responsive">
         <table class="table table-hover">
           <thead  >
-            <tr style="border: 2.5px solid #949494; ">
+            <tr style="border: 2.5px solid #E5E5E5;">
               <th>S.No</th>
               <th>Product Name</th>
               <th>Category</th>
@@ -32,9 +35,16 @@
             </tr>
           </thead>
           <tbody>
-            
+            <div class="uper my-4">
+              @if(session()->get('searchError'))
+                <div class="alert alert-danger">
+                  {{ session()->get('searchError') }}  
+                </div><br />
+              @endif
+            </div> 
             @foreach($p_details as $products)
               <tr class="border-dark">
+                
                 <td>{{$products->id}}</td>
                 <td>{{$products->product_name}}</td>
                 <td>{{$products->category}}</td>

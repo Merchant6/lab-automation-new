@@ -19,6 +19,10 @@ Route::get('/', function () {
     return redirect('dashboard');
 });
 
+// Route::get('/search?', function () {
+//     return redirect('view_products');
+// });
+
 //Dashboard Routes
 Route::get('dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
 
@@ -42,3 +46,6 @@ Route::get('/view_products',[ProductController::class, 'viewDetails'])->name('vi
 
 //Delete Product
 Route::delete('/delete_product/{id}',[ProductController::class, 'destroy'])->name('delete_product');
+
+//Search Product
+Route::any('search',[ProductController::class, 'search'])->name('search');

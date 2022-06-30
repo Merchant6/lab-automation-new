@@ -57,9 +57,31 @@ class ProductController extends Controller
 
             public function viewDetails(Request $request)
             {
+                  
                 $p_details = products::all();
                 return view('products\view_products', compact('p_details'));
             }
+
+            public function search(Request $request)
+            {
+                $search = $request['search'] ?? "";
+                if($search !== null)
+                {
+                    $p_details = products::where('product_name', 'LIKE', "%$search%")->get();
+                    
+                   
+                }
+                else
+                {
+                    return redirect()->to('view_products')->with('error','Product not found');
+                    $p_details = products::all();
+
+                }
+
+                
+                return view('products\view_products', compact('p_details'));
+            }
+
 
 
         /**
@@ -121,10 +143,5 @@ class ProductController extends Controller
         return redirect('view_products')->with('error', 'Product successfully deleted');
     }
 
-    // public function countPro()
-    // {
-    //     $tested = products::where("testing_type", ['Earth Testing' OR 'Resistence Testing' OR 'Leakage Testing'])->count();
-    //     view()->share('tested', $tested);
-    // }
     
 }
