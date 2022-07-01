@@ -45,7 +45,8 @@
             @foreach($p_details as $products)
               <tr class="border-dark">
                 
-                <td>{{$products->id}}</td>
+                <td>{{$products->id}}-{{Carbon\Carbon::parse($products->created_at)->format('dmyi')}}</td>
+              
                 <td>{{$products->product_name}}</td>
                 <td>{{$products->category}}</td>
                 <td>{{$products->testing_type}}</td>

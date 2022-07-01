@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\products;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -48,9 +49,11 @@ class ProductController extends Controller
                 'remarks' => $data['remarks'],
               ]);
 
+               
+
               
             
-              return redirect()->to('view_products')->with('success','Product added successfully');
+              return redirect()->to('view_products')->with(['success','Product added successfully', 'manID' , 'formatID']);
         
        
     }
@@ -153,6 +156,10 @@ class ProductController extends Controller
 
         return redirect('view_products')->with('error', 'Product successfully deleted');
     }
+
+
+    
+   
 
     
 }

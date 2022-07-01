@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('products_tb', function (Blueprint $table) {
             $table->id()->startingValue(10000);
+            
             // $table->foreign('id')->references('id')->on('testing_tb');
             $table->string('product_name', 50);
             $table->string('category',50);
