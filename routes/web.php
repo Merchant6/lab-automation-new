@@ -49,3 +49,13 @@ Route::delete('/delete_product/{id}',[ProductController::class, 'destroy'])->nam
 
 //Search Product
 Route::any('search',[ProductController::class, 'search'])->name('search');
+
+//Edit Product
+Route::get('/edit_product/{id?}',[ProductController::class, 'edit'])->name('edit_product');
+
+//Update Product Data
+Route::post('update_product/{id}',[ProductController::class, 'update'])->name('update_product');
+
+//Update Product Data
+Route::get('/edit_user/{id?}',[AuthController::class, 'editUser'])->name('edit_user');
+Route::post('update_profile/{id?}',[AuthController::class, 'updateProfile'])->name('update_profile');

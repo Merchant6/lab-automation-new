@@ -81,7 +81,21 @@ class AuthController extends Controller
             $untested = DB::table('products_tb')->where('testing_type', '=', "Not Tested Yet")->count();
 
             //Ratio
-            $ratio = $tested / $untested;
+
+           
+            if($untested == 0)
+            {
+                $ratio = $tested;
+            }
+            elseif($tested == 0)
+            {
+                $ratio = $untested;
+            }
+            else
+            {
+                $ratio = $tested / $untested;
+            }
+
             return view('dashboard\home',['total' => $total,'tested' => $tested,'untested' => $untested, 'ratio' => $ratio]);
         }
   
@@ -93,5 +107,33 @@ class AuthController extends Controller
         Auth::logout();
   
         return Redirect('login');
+    }
+
+
+
+    public function editUser($id)
+    {
+        $user_edit = admin::find($id);
+        return redirect()->to('update_profile',compact($user_edit));
+
+        
+        
+    }
+
+    public function updateProfile(Request $request, $id)
+    {
+        $userData = $request->only(["username","password"]);
+        $userData['password'] = Hash::make($userData['password']);
+        
+            //validate post data
+        $this->validate($request, [
+            'username' => 'required',
+            'password' => 'required|min:8',
+            'confirm_password' => 'required|same:password'
+        ]);
+       
+        admin::find($id)->update($userData);
+        Session::flash('success_msg', 'User details updated successfully!');
+        return view('auth\profile')->with('success', 'User data is updated');
     }
 }

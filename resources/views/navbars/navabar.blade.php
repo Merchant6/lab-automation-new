@@ -30,12 +30,12 @@
           
           <li class="nav-item nav-profile dropdown">
             <span class="text-capitalize">{{Auth::user()->username}}</span>
-            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="profileDropdown">
               
               <span class="nav-profile-name"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item">
+              <a class="dropdown-item" href="{{route('edit_user', Auth::user()->id)}}">
                 <i class="mdi mdi-settings text-primary"></i>
                 Profile
                 

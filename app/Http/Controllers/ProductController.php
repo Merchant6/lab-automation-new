@@ -101,7 +101,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-        public function show()
+        public function show($id)
         {
                 
         }
@@ -114,7 +114,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product_edit = products::findOrFail($id);
+        return view('products\edit', compact('product_edit'));
     }
 
     /**
@@ -126,7 +127,17 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+               'product_name' => 'required',
+                'category' => 'required',
+                'testing_type' => 'required',
+                'remarks' => 'required'
+        ]);
+         products::whereId($id)->update($validatedData);
+
+        
+
+        return redirect('view_products')->with('success', 'Product data is successfully updated');
     }
 
     /**

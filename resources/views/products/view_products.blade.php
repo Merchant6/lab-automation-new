@@ -56,6 +56,14 @@
                     @method('delete')
                     <button class="btn btn-danger" type="submit">Delete</button>
                   </form>
+                  
+              </td>
+              <td>
+                <form action="{{route('edit_product', $products->id)}}" method="GET">
+                  @csrf
+                  @method('get')
+                  <button class="btn btn-success" type="submit">Edit</button>
+                </form>
               </td>
               </tr>   
             @endforeach
