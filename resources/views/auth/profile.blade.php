@@ -22,13 +22,13 @@
               <div class="card-body">
                 <h4 class="card-title">Default form</h4>
                 
-                <form class="forms-sample" method="POST" action="{{route('update_profile', Auth::id() )}}">
+                <form class="forms-sample" method="POST" action="{{route('update_profile', Auth::id())}}">
                     
                   @csrf
-                  
+                  @method('POST')
                   <div class="form-group">
                     <label for="exampleInputUsername1">Username</label>
-                    <input type="text" class="form-control border-dark" name="username" value="{{ Auth::user()->username }}"/>
+                    <input type="text" class="form-control border-dark" name="username" value="{{Auth::user()->username}}"/>
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Password</label>

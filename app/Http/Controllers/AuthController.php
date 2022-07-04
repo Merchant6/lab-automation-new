@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\admin;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -16,7 +17,7 @@ class AuthController extends Controller
  
     public function __construct()
     {
-        $this->middleware('guest')->except('signOut');
+        $this->middleware('guest')->except(['signOut', 'editUser','updateProfile']);
     }
 
 
@@ -89,7 +90,8 @@ class AuthController extends Controller
     public function editUser($id)
     {
         $user_edit = admin::find($id);
-        return redirect()->to('update_profile',compact($user_edit));
+        
+        return view('auth.profile', [$user_edit]);
 
         
         
@@ -97,18 +99,14 @@ class AuthController extends Controller
 
     public function updateProfile(Request $request, $id)
     {
-        $userData = $request->only(["username","password"]);
-        $userData['password'] = Hash::make($userData['password']);
-        
-            //validate post data
-        $this->validate($request, [
-            'username' => 'required',
-            'password' => 'required|min:8',
-            'confirm_password' => 'required|same:password'
-        ]);
-       
-        admin::find($id)->update($userData);
-        Session::flash('success_msg', 'User details updated successfully!');
-        return view('auth\profile')->with('success', 'User data is updated');
+        $user = admin::findOrFail($id);
+
+        $user->username = $request->get('username');
+    
+        $user->password = $request->get('password');
+    
+        $user->save();
+    
+        return redirect()->route('edit_user', [$user->id]);
     }
 }

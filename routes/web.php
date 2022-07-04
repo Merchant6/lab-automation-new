@@ -63,7 +63,7 @@ use Illuminate\Support\Facades\Auth;
         //Update Product Data
         Route::post('update_product/{id}',[ProductController::class, 'update'])->name('update_product');
 
-        //Update Product Data
+        //Update Profile Data
         Route::get('/edit_user/{id}',[AuthController::class, 'editUser'])->name('edit_user');
         Route::post('update_profile/{id?}',[AuthController::class, 'updateProfile'])->name('update_profile');
 
