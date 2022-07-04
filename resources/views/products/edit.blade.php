@@ -47,10 +47,11 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
               <div class="card-body">
-                <h4 class="card-title">Default form</h4>
+                <h4 class="card-title">Product Updation Form</h4>
                 
                 <form class="forms-sample" method="POST" action="{{route('update_product', $product_edit->id)}}">
                   @csrf
+                  
                   <div class="form-group">
                     <label for="exampleInputUsername1">Product Name</label>
                     <input type="text" class="form-control border-dark" name="product_name" value="{{ $product_edit->product_name }}"/>

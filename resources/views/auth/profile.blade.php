@@ -25,6 +25,7 @@
                 <form class="forms-sample" method="POST" action="{{route('update_profile', Auth::id() )}}">
                     
                   @csrf
+                  
                   <div class="form-group">
                     <label for="exampleInputUsername1">Username</label>
                     <input type="text" class="form-control border-dark" name="username" value="{{ Auth::user()->username }}"/>

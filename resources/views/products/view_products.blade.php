@@ -2,8 +2,9 @@
 
 @section('content')
 
-<div class="card col-lg-10 justify-content-center">
-    <div class="card-body">
+<div class="container">
+  <div class="card col-lg-12 justify-content-center">
+    <div class="card-body" >
       <h3 class="my-5">Products Details and Testing Type</h3>
       
       <div class="uper my-4">
@@ -45,7 +46,7 @@
             @foreach($p_details as $products)
               <tr class="border-dark">
                 
-                <td>{{$products->id}}-{{Carbon\Carbon::parse($products->created_at)->format('dmyi')}}</td>
+                <td>{{Carbon\Carbon::parse($products->created_at)->format('dmyi')}}-{{$products->id}}</td>
               
                 <td>{{$products->product_name}}</td>
                 <td>{{$products->category}}</td>
@@ -75,5 +76,8 @@
       </div>
     </div>
   </div>
+
+</div>
+
 
 @endsection

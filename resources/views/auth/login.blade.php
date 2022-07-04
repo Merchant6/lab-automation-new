@@ -16,9 +16,17 @@
   <link rel="stylesheet" href="{{asset('/theme/css/style.css')}}">
   <!-- endinject -->
   <link rel="shortcut icon" href="{{asset('/theme/images/favicon.png')}}" />
+
+  
 </head>
 
+
+
+
 <body>
+
+ 
+
   <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper">
       <div class="content-wrapper d-flex align-items-center auth px-0">
@@ -42,13 +50,8 @@
                   <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</button>
                 </div>
                 <div class="my-2 d-flex justify-content-between align-items-center">
-                  <div class="form-check">
-                    <label class="form-check-label text-muted">
-                      <input type="checkbox" class="form-check-input">
-                      Keep me signed in
-                    </label>
-                  </div>
-                  <a href="#" class="auth-link text-black">Forgot password?</a>
+                  
+                  
                 </div>
                 <div class="mb-2">
                   

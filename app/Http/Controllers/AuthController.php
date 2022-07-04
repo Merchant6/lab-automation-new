@@ -7,12 +7,21 @@ use Illuminate\Support\Facades\Session;
 use App\Models\admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\products;
-use Illuminate\Support\Facades\DB;
+
+
 
 
 class AuthController extends Controller
 {
+ 
+    public function __construct()
+    {
+        $this->middleware('guest')->except('signOut');
+    }
+
+
+
+
     public function GetLogin()
     {
         return view('auth.login');
@@ -26,10 +35,12 @@ class AuthController extends Controller
         ]);
    
         $credentials = $request->only('username', 'password');
-        $data = "";
-        if (Auth::attempt($credentials)) {
+        
+        
+        if(Auth::attempt($credentials)) {
            
             return redirect()->intended('dashboard')->withSuccess('Signed in');
+            
         }
   
         return redirect("login")->withSuccess('Login details are not valid');
@@ -64,43 +75,7 @@ class AuthController extends Controller
       
     }    
     
-    public function dashboard()
-    {
-        if(Auth::check()){
-           
-            $total =  DB::table('products_tb')->count();
-
-            //Testes Products
-            $etesting = DB::table('products_tb')->where('testing_type', '=', "Earth Testing")->count();
-            $rtesting = DB::table('products_tb')->where('testing_type', '=', "Resistance Testing")->count();
-            $letesting = DB::table('products_tb')->where('testing_type', '=', "Leakage Testing")->count();
-
-            $tested = $etesting + $rtesting + $letesting;
-
-            //Untested Products
-            $untested = DB::table('products_tb')->where('testing_type', '=', "Not Tested Yet")->count();
-
-            //Ratio
-
-           
-            if($untested == 0)
-            {
-                $ratio = $tested;
-            }
-            elseif($tested == 0)
-            {
-                $ratio = $untested;
-            }
-            else
-            {
-                $ratio = $tested / $untested;
-            }
-
-            return view('dashboard\home',['total' => $total,'tested' => $tested,'untested' => $untested, 'ratio' => $ratio]);
-        }
-  
-        return redirect("login")->withSuccess('You are not allowed to access');
-    }
+    
     
     public function signOut() {
         Session::flush();

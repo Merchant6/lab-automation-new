@@ -22429,7 +22429,7 @@ dl li {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   -ms-box-shadow: none;
-  border-right: 1px solid #e3e3e3;
+  border-right: 1px solid transparent;
 }
 
 .sidebar .nav {

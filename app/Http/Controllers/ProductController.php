@@ -8,17 +8,55 @@ use App\Models\products;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
+
+    
+
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function dashboard()
     {
-        //
+        if(Auth::check()){
+           
+            $total =  DB::table('products_tb')->count();
+
+            //Testes Products
+            $etesting = DB::table('products_tb')->where('testing_type', '=', "Earth Testing")->count();
+            $rtesting = DB::table('products_tb')->where('testing_type', '=', "Resistance Testing")->count();
+            $letesting = DB::table('products_tb')->where('testing_type', '=', "Leakage Testing")->count();
+
+            $tested = $etesting + $rtesting + $letesting;
+
+            //Untested Products
+            $untested = DB::table('products_tb')->where('testing_type', '=', "Not Tested Yet")->count();
+
+            //Latest Products
+            $latest = products::latest()->limit(4)->get();
+           
+            if($untested == 0)
+            {
+                $ratio = $tested;
+            }
+            elseif($tested == 0)
+            {
+                $ratio = $untested;
+            }
+            else
+            {
+                $ratio = $tested / $untested;
+            }
+
+            return view('dashboard\home',['total' => $total,'tested' => $tested,'untested' => $untested, 'ratio' => $ratio, 'latest' => $latest]);
+        }
+  
+        return redirect("login")->withSuccess('You are not allowed to access');
     }
 
     /**
@@ -70,12 +108,18 @@ class ProductController extends Controller
                 $search = $request['search'] ?? "";
                 if($search !== null)
                 {
-                    $p_details = products::where('product_name', 'LIKE', "%$search%")->get();
+                    $p_details = products::where('product_name', 'LIKE', "%$search%")
+                    ->orwhere('testing_type', 'LIKE', "%$search%")
+                    ->orwhere('id', 'LIKE', "%$search%")
+                    ->orwhere('remarks', 'LIKE', "$search%")
+                    ->orwhere('category', 'LIKE', "$search%")
+                    ->get();
                     
                    
                 }
                 else
                 {
+                    
                     return redirect()->to('view_products')->with('error','Product not found');
                     $p_details = products::all();
 
