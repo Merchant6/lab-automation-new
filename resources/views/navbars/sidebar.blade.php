@@ -21,7 +21,7 @@
       </li>
      
       <li class="nav-item">
-        <a class="nav-link" href="documentation/documentation.html">
+        <a class="nav-link" href="{{asset('Documentation-Majestic.pdf')}}">
           <i class="mdi mdi-file-document-box-outline menu-icon"></i>
           <span class="menu-title">Documentation</span>
         </a>

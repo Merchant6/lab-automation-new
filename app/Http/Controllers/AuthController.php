@@ -103,7 +103,7 @@ class AuthController extends Controller
 
         $user->username = $request->get('username');
     
-        $user->password = $request->get('password');
+        $user->password = Hash::make($request->get('password'));
     
         $user->save();
     
