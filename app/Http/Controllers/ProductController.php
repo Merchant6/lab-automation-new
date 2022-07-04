@@ -112,7 +112,7 @@ class ProductController extends Controller
                     ->orwhere('testing_type', 'LIKE', "%$search%")
                     ->orwhere('id', 'LIKE', "%$search%")
                     ->orwhere('remarks', 'LIKE', "$search%")
-                    ->orwhere('category', 'LIKE', "$search%")
+                    ->orwhere('category', 'LIKE', "%$search%")
                     ->get();
                     
                    
